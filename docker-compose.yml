@@ -1,0 +1,11 @@
+services:
+  estoque-api:
+    build: .
+    container_name: sistema-estoque-api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/usr/src/app/data
+    env_file:
+      - .env
+    restart: always

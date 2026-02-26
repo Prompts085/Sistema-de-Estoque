@@ -1,15 +1,21 @@
-const sqlite3 = require("sqlite3").verbose()
-const path = require('path')
+import sqlite3 from "sqlite3";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const dbPath = path.resolve(__dirname, "database.db")
-const db = new sqlite3.Database(dbPath, (err) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const dbPath = process.env.DB_FILE || path.resolve(__dirname, "../../database.db");
+
+//Executamos o verbose() primeiro e depois instanciamos o Database
+const sqlite = sqlite3.verbose();
+const db = new sqlite.Database(dbPath, (err) => {
     if (err) {
-    console.error("Erro ao conectar no banco:", err)
-  } else {
-    console.log("Banco SQLite conectado")
-  }
-})
-
+        console.error("Erro ao abrir o banco de dados:", err.message);
+    } else {
+        console.log("Banco de dados conectado");
+    }
+});
 
 db.parallelize(() => { // roda tudo em paralelo (rápido, perigoso pra FK)
 
@@ -49,4 +55,4 @@ CREATE TABLE IF NOT EXISTS MOVIMENTACOES (
 `)
 })
 
-module.exports = db
+export default db;

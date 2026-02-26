@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken")
+import jwt from 'jsonwebtoken'
 
-const SECRET = "meuSegredoSuperSeguro"
+const SECRET = process.env.JWT_SECRET
 
 function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization
@@ -22,4 +22,4 @@ function authMiddleware(req, res, next) {
   }
 }
 
-module.exports = authMiddleware
+export default authMiddleware;

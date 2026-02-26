@@ -8,4 +8,5 @@ function autorizarRoles(profiles){
     next()
   }
 }
-module.exports = autorizarRoles
+
+export default autorizarRoles

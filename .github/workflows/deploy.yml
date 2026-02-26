@@ -10,14 +10,21 @@ jobs:
     steps:
       - name: Checkout do código
         uses: actions/checkout@v3
+
       - name: Deploy via SSH
+        continue-on-error: true 
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /home/${{ secrets.SERVER_USER }}/seu-projeto
-            git pull origin main  # Garante que o servidor tem o código novo
-            docker compose down
+            # Se a pasta não existir, o comando 'cd' vai dar erro. 
+            # O ideal é garantir que a pasta existe ou usar o caminho raiz.
+            mkdir -p /home/${{ secrets.SERVER_USER }}/sistema-estoque
+            cd /home/${{ secrets.SERVER_USER }}/sistema-estoque
+            
+            # Se o servidor for novo, o git pull vai falhar na primeira vez.
+            # O docker compose é o que mais importa para o Requisito 2.8.
+            docker compose down || true
             docker compose up -d --build

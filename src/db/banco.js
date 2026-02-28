@@ -1,21 +1,21 @@
-import sqlite3 from "sqlite3";
-import path from "path";
-import { fileURLToPath } from "url";
+import sqlite3 from "sqlite3"
+import path from "path"
+import { fileURLToPath } from "url"
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-const dbPath = process.env.DB_FILE || path.resolve(__dirname, "../../database.db");
+const dbPath = process.env.DB_FILE || path.resolve(__dirname, "../../database.db")
 
 //Executamos o verbose() primeiro e depois instanciamos o Database
-const sqlite = sqlite3.verbose();
+const sqlite = sqlite3.verbose()
 const db = new sqlite.Database(dbPath, (err) => {
     if (err) {
-        console.error("Erro ao abrir o banco de dados:", err.message);
+        console.error("Erro ao abrir o banco de dados:", err.message)
     } else {
-        console.log("Banco de dados conectado");
+        console.log("Banco de dados conectado")
     }
-});
+})
 
 db.parallelize(() => { // roda tudo em paralelo (rápido, perigoso pra FK)
 
@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS MOVIMENTACOES (
   data_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (produto_id) REFERENCES PRODUTOS(id),
   FOREIGN KEY (usuario_id) REFERENCES USUARIOS(id)
-);
+)
 `)
 })
 
-export default db;
+export default db

@@ -13,9 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.0",
     "express": "^5.2.1",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.3",
-    "sqlite3": "^5.1.7",
-    "dotenv": "^16.4.0"
+    "sqlite3": "^5.1.7"
   }
 }

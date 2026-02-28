@@ -6,6 +6,8 @@ services:
       - "3000:3000"
     volumes:
       - ./data:/usr/src/app/data
+      - ./acessos.log:/usr/src/app/acessos.log
+      - ./relatorio.csv:/usr/src/app/relatorio.csv
     env_file:
       - .env
     restart: always

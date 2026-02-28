@@ -1,8 +1,12 @@
 import express from "express"
-import login from "../controllers/auth.controller.js"
+import relatorioControll from "../controllers/auth.controller.js"
+import authMiddleware from "../middlewares/authMiddleware.js" 
 
 const router = express.Router()
 
-router.post("/login", login)
+//Rota de fazer Login:
+router.post("/login", relatorioControll.login)
+//Rota do EndPoint /me:
+router.get("/me", authMiddleware, relatorioControll.me)
 
 export default router

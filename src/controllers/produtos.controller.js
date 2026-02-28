@@ -21,7 +21,7 @@ criarProduto: (req, res) => {
           if (err) return res.status(500).json({ error: err.message })
             
           return res.status(200).json({ 
-            mensagem: "Produto já existia, estoque atualizado", 
+            mensagem: "Produto já existia, atualizado a quantidade", 
             id: produtoExiste.id,
             estoque_atual: novaQuantidade 
           })

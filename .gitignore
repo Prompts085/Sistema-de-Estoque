@@ -1,3 +1,5 @@
 node_modules/
 .env
 *.db
+acessos.log
+relatorio.csv
